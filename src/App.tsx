@@ -1,16 +1,11 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { FadeLoader } from "react-spinners";
 
 // components
 import Header from "./components/Header";
-import TodoItem from "./components/TodoItem";
+
 import TodoList from "./components/TodoList";
 import { auth, logInWithGoogle } from "./services/firebaseAuthentication";
-import { getTodoItemsByUserId } from "./services/firebaseLogic";
-
-// types
-import { TodoItemType } from "./types/todoTypes";
 
 type ContentContainerProps = {
   children: ReactNode | ReactNode[];

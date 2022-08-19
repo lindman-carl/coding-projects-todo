@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FadeLoader } from "react-spinners";
 
 import { getTodoItemsByUserId } from "../services/firebaseLogic";
@@ -24,6 +24,7 @@ const TodoList = ({ uid }: TodoListProps) => {
     };
 
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
