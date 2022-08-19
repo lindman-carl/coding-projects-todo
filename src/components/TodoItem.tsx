@@ -1,7 +1,7 @@
 import React from "react";
 
 // types
-import { TodoItemType } from "../todoTypes";
+import { TodoItemType } from "../types/todoTypes";
 
 type TodoItemProps = {
   item: TodoItemType;

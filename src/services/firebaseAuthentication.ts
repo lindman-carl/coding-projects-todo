@@ -12,7 +12,7 @@ import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { app, db } from "./firebase";
 
 // types
-import { User } from "../types";
+import { UserType } from "../types/firebaseTypes";
 
 // authentication
 const auth = getAuth(app);
@@ -45,8 +45,7 @@ const logInWithGoogle = async () => {
         name: user.displayName,
         authProvider: "google",
         email: user.email,
-        budget: 0,
-      } as User;
+      } as UserType;
       // add user to db
       await setDoc(doc(db, "users", user.uid), userData);
     }
