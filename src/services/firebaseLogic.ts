@@ -1,22 +1,28 @@
 import { getDocs, collection, where, query } from "firebase/firestore";
-import { Transaction } from "../types";
+import { TodoItemType } from "../types/todoTypes";
 import { db } from "./firebase";
 
-export const getTransactionsByUser = async (
+export const getTodoItemsByUserId = async (
   uid: string
-): Promise<Transaction[] | []> => {
-  const transactions: Transaction[] = [];
+): Promise<TodoItemType[] | []> => {
+  let todoItems: TodoItemType[] | [] = [];
   try {
-    const q = query(collection(db, "transactions"), where("uid", "==", uid));
-    const transactionsSnapshot = await getDocs(q);
+    // query for todoItems by uid
+    const q = query(collection(db, "todoItems"), where("uid", "==", uid));
 
-    transactionsSnapshot.forEach((doc) => {
-      const transaction = doc.data() as Transaction;
-      transactions.push(transaction);
+    // get snapshot
+    const todoItemsSnapshot = await getDocs(q);
+
+    // map todoItems
+    todoItems = todoItemsSnapshot.docs.map((doc) => {
+      const todoItem = doc.data() as TodoItemType;
+
+      return todoItem;
     });
   } catch (error) {
-    console.log(error);
+    // TODO: do something
+    console.error(error);
   }
 
-  return transactions;
+  return todoItems;
 };

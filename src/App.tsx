@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 
 // components
 import Header from "./components/Header";
@@ -6,7 +6,7 @@ import TodoItem from "./components/TodoItem";
 import TodoList from "./components/TodoList";
 
 // types
-import { TodoItemType } from "./todoTypes";
+import { TodoItemType } from "./types/todoTypes";
 
 const todoItem: TodoItemType = {
   title: "Clean the kitchen",
@@ -24,6 +24,8 @@ const ContentContainer = ({ children }: ContentContainerProps) => {
 };
 
 const App = () => {
+  const [todoItems, setTodoItems] = useState<TodoItemType[] | undefined>();
+
   return (
     <div className="app-container">
       <Header />
