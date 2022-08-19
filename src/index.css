@@ -39,5 +39,15 @@ body {
         rounded-xl
         bg-theme-background
         shadow-lg
-        flex justify-center items-center;
+        flex flex-col justify-start items-stretch divide-y
+        ;
+}
+
+.todo-item-container {
+    @apply
+        w-full
+        p-2
+        flex flex-row items-center justify-start gap-8
+        hover:bg-theme-secondary
+        ;
 }

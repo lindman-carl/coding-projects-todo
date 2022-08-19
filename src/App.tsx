@@ -13,24 +13,14 @@ type TodoListProps = {
 };
 
 const TodoList = ({ children }: TodoListProps) => {
-  return (
-    <div className="todo-list-container">
-      <div>{children}</div>
-    </div>
-  );
+  return <div className="todo-list-container">{children}</div>;
 };
-
-enum TodoStatus {
-  Active = "Activec",
-  Done = "Done",
-  Archived = "Archived",
-}
 
 type TodoItemType = {
   title: string;
-  description: string;
   id: string;
-  status: TodoStatus;
+  done: boolean;
+  archived: boolean;
 };
 
 type TodoItemProps = {
@@ -38,19 +28,20 @@ type TodoItemProps = {
 };
 
 const TodoItem = ({ item }: TodoItemProps) => {
-  const { title, description, status } = item;
+  const { title } = item;
   return (
-    <div className="todo-item-container">
-      {title} - {description} - {status}
-    </div>
+    <button className="todo-item-container">
+      <div className="w-6 h-6 rounded-md border-2 border-theme-primary shadow"></div>
+      <div className="font-medium text-lg">{title}</div>
+    </button>
   );
 };
 
 const todoItem: TodoItemType = {
   title: "Clean the kitchen",
-  description: "Clean that motherfucker",
   id: "lkjadlkj0192i3",
-  status: TodoStatus.Archived,
+  done: false,
+  archived: false,
 };
 
 const App = () => {
@@ -58,6 +49,11 @@ const App = () => {
     <div className="app-container">
       <Header />
       <TodoList>
+        <TodoItem item={todoItem} />
+        <TodoItem item={todoItem} />
+        <TodoItem item={todoItem} />
+        <TodoItem item={todoItem} />
+        <TodoItem item={todoItem} />
         <TodoItem item={todoItem} />
       </TodoList>
     </div>
