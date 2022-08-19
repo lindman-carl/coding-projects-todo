@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    @apply bg-theme-background;
+}
+
+.app-container {
+    @apply
+        flex
+        flex-col
+        items-center
+        justify-start sm:my-auto
+        gap-y-4
+        p-4
+        h-screen
+        w-screen
+        text-theme-text;
+}
+
+.header-container {
+    @apply 
+        w-full 
+        sm:max-w-md 
+        p-8 
+        rounded-xl
+        bg-theme-primary
+        text-theme-background
+        shadow-lg
+        flex justify-center items-center;
+}
+
+.todo-list-container {
+    @apply 
+        w-full 
+        sm:max-w-md 
+        p-8 
+        rounded-xl
+        bg-theme-light
+        shadow-lg
+        flex justify-center items-center;
+}
