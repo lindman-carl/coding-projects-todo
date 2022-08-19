@@ -1,41 +1,12 @@
-import React, { ReactNode } from "react";
+import React from "react";
 
-const Header = () => {
-  return (
-    <div className="header-container">
-      <div className="text-3xl font-bold drop-shadow-lg">TODO APP</div>
-    </div>
-  );
-};
+// components
+import Header from "./components/Header";
+import TodoItem from "./components/TodoItem";
+import TodoList from "./components/TodoList";
 
-type TodoListProps = {
-  children: ReactNode | ReactNode[];
-};
-
-const TodoList = ({ children }: TodoListProps) => {
-  return <div className="todo-list-container">{children}</div>;
-};
-
-type TodoItemType = {
-  title: string;
-  id: string;
-  done: boolean;
-  archived: boolean;
-};
-
-type TodoItemProps = {
-  item: TodoItemType;
-};
-
-const TodoItem = ({ item }: TodoItemProps) => {
-  const { title } = item;
-  return (
-    <button className="todo-item-container">
-      <div className="w-6 h-6 rounded-md border-2 border-theme-primary shadow"></div>
-      <div className="font-medium text-lg">{title}</div>
-    </button>
-  );
-};
+// types
+import { TodoItemType } from "./todoTypes";
 
 const todoItem: TodoItemType = {
   title: "Clean the kitchen",
