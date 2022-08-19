@@ -10,7 +10,7 @@ import { TodoItemType } from "./todoTypes";
 
 const todoItem: TodoItemType = {
   title: "Clean the kitchen",
-  id: "lkjadlkj0192i3",
+  uid: "lkjadlkj0192i3",
   done: false,
   archived: false,
 };
