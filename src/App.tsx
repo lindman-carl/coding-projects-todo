@@ -1,21 +1,16 @@
 import React, { ReactNode, useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { FadeLoader } from "react-spinners";
 
 // components
 import Header from "./components/Header";
 import TodoItem from "./components/TodoItem";
 import TodoList from "./components/TodoList";
+import { auth, logInWithGoogle } from "./services/firebaseAuthentication";
 import { getTodoItemsByUserId } from "./services/firebaseLogic";
 
 // types
 import { TodoItemType } from "./types/todoTypes";
-
-const todoItem: TodoItemType = {
-  title: "Clean the kitchen",
-  uid: "lkjadlkj0192i3",
-  done: false,
-  archived: false,
-};
 
 type ContentContainerProps = {
   children: ReactNode | ReactNode[];
@@ -26,34 +21,18 @@ const ContentContainer = ({ children }: ContentContainerProps) => {
 };
 
 const App = () => {
-  const [todoItems, setTodoItems] = useState<TodoItemType[] | undefined>();
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const getData = async () => {
-      const items = await getTodoItemsByUserId("ada");
-
-      console.log(items);
-      setTodoItems(items);
-      setLoading(false);
-    };
-
-    getData();
-  }, []);
+  const [user, loading] = useAuthState(auth);
 
   return (
     <div className="app-container">
       <Header />
       <ContentContainer>
-        {loading ? (
-          <FadeLoader />
+        {!loading && user ? (
+          <TodoList uid={user.uid} />
         ) : (
-          <TodoList>
-            {todoItems?.map((item) => (
-              <TodoItem item={item} />
-            ))}
-          </TodoList>
+          <button onClick={logInWithGoogle}>Login</button>
         )}
+        {}
       </ContentContainer>
     </div>
   );
