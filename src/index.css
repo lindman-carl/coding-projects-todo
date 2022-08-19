@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    @apply bg-theme-background;
+    @apply bg-theme-light;
 }
 
 .app-container {
@@ -37,7 +37,7 @@ body {
         sm:max-w-md 
         p-8 
         rounded-xl
-        bg-theme-light
+        bg-theme-background
         shadow-lg
         flex justify-center items-center;
 }
