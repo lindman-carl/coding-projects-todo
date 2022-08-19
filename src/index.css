@@ -31,7 +31,7 @@ body {
         flex justify-center items-center;
 }
 
-.todo-list-container {
+.content-container {
     @apply 
         w-full 
         sm:max-w-md 
@@ -39,6 +39,13 @@ body {
         rounded-xl
         bg-theme-background
         shadow-lg
+        flex flex-col justify-start items-center
+        ;
+}
+
+.todo-list-container {
+    @apply 
+        w-full 
         flex flex-col justify-start items-stretch divide-y
         ;
 }

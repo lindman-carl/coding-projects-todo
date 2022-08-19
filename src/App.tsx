@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 // components
 import Header from "./components/Header";
@@ -15,18 +15,28 @@ const todoItem: TodoItemType = {
   archived: false,
 };
 
+type ContentContainerProps = {
+  children: ReactNode | ReactNode[];
+};
+
+const ContentContainer = ({ children }: ContentContainerProps) => {
+  return <div className="content-container">{children}</div>;
+};
+
 const App = () => {
   return (
     <div className="app-container">
       <Header />
-      <TodoList>
-        <TodoItem item={todoItem} />
-        <TodoItem item={todoItem} />
-        <TodoItem item={todoItem} />
-        <TodoItem item={todoItem} />
-        <TodoItem item={todoItem} />
-        <TodoItem item={todoItem} />
-      </TodoList>
+      <ContentContainer>
+        <TodoList>
+          <TodoItem item={todoItem} />
+          <TodoItem item={todoItem} />
+          <TodoItem item={todoItem} />
+          <TodoItem item={todoItem} />
+          <TodoItem item={todoItem} />
+          <TodoItem item={todoItem} />
+        </TodoList>
+      </ContentContainer>
     </div>
   );
 };
