@@ -37,7 +37,8 @@ const App = () => {
       if (!loading && user) {
         const items = await getTodoItemsByUserId(user?.uid);
         const sortedItems = sortTodoItems(items);
-        console.log("fetched items:", sortedItems);
+
+        // set state
         setTodoItems(sortedItems);
         setFetching(false);
       }
