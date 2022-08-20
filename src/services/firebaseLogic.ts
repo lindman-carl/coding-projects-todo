@@ -1,4 +1,12 @@
-import { getDocs, collection, where, query } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  where,
+  query,
+  setDoc,
+  doc,
+  addDoc,
+} from "firebase/firestore";
 import { TodoItemType } from "../types/todoTypes";
 import { db } from "./firebase";
 
@@ -16,6 +24,8 @@ export const getTodoItemsByUserId = async (
     // map todoItems
     todoItems = todoItemsSnapshot.docs.map((doc) => {
       const todoItem = doc.data() as TodoItemType;
+      // add id to todoItem
+      todoItem.id = doc.id;
 
       return todoItem;
     });
@@ -25,4 +35,33 @@ export const getTodoItemsByUserId = async (
   }
 
   return todoItems;
+};
+
+export const addTodo = async (
+  uid: string,
+  title: string
+): Promise<TodoItemType | null> => {
+  try {
+    // check for input
+    if (title.length < 1) {
+      return null;
+    }
+
+    const newTodo: TodoItemType = {
+      uid,
+      title,
+      done: false,
+      archived: false,
+    };
+
+    // add document
+    const res = await addDoc(collection(db, "todoItems"), newTodo);
+
+    // add id to newTodo
+    return { ...newTodo, id: res.id };
+  } catch (error) {
+    console.error(error);
+  }
+
+  return null;
 };

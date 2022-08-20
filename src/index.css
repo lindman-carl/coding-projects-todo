@@ -22,19 +22,21 @@ body {
 .header-container {
     @apply 
         w-full 
-        sm:max-w-md 
+        sm:max-w-lg 
         p-8 
         rounded-xl
         bg-theme-primary
         text-theme-background
         shadow-lg
-        flex justify-center items-center;
+        flex flex-col justify-center items-center gap-y-4;
 }
 
 .content-container {
     @apply 
         w-full 
-        sm:max-w-md 
+        max-h-[30rem]
+        overflow-auto
+        sm:max-w-lg 
         p-8 
         rounded-xl
         bg-theme-background
@@ -46,7 +48,7 @@ body {
 .todo-list-container {
     @apply 
         w-full 
-        flex flex-col justify-start items-stretch divide-y
+        flex flex-col justify-start items-center divide-y
         ;
 }
 
@@ -56,5 +58,14 @@ body {
         p-2
         flex flex-row items-center justify-start gap-8
         hover:bg-theme-secondary
+        ;
+}
+
+.add-todo-container {
+    @apply 
+        w-full 
+        text-theme-background
+        flex flex-row justify-between items-center
+        gap-8
         ;
 }

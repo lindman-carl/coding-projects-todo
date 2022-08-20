@@ -1,36 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { FadeLoader } from "react-spinners";
+import React from "react";
+import { ClipLoader } from "react-spinners";
 
-import { getTodoItemsByUserId } from "../services/firebaseLogic";
 import { TodoItemType } from "../types/todoTypes";
 import TodoItem from "./TodoItem";
 
 type TodoListProps = {
   // children: ReactNode | ReactNode[];
-  uid: string;
+  fetching: boolean;
+  todoItems?: TodoItemType[];
 };
 
-const TodoList = ({ uid }: TodoListProps) => {
-  const [todoItems, setTodoItems] = useState<TodoItemType[] | undefined>();
-  const [fetching, setFetching] = useState<boolean>(true);
-
-  useEffect(() => {
-    const getData = async () => {
-      const items = await getTodoItemsByUserId(uid);
-
-      console.log(items);
-      setTodoItems(items);
-      setFetching(false);
-    };
-
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+const TodoList = ({ fetching, todoItems }: TodoListProps) => {
   return (
     <div className="todo-list-container">
       {fetching ? (
-        <FadeLoader />
+        <ClipLoader className="my-8" color={"#3d5a80"} />
       ) : (
         todoItems?.map((item) => <TodoItem item={item} key={item.id} />)
       )}
