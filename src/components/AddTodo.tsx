@@ -19,7 +19,7 @@ const AddTodo = ({ title, setTitle, handleSubmit }: AddTodoProps) => {
           placeholder={"Add task"}
         />
       </div>
-      <button className="bg-theme-secondary px-8 py-2 rounded font-medium text-lg shadow active:scale-95 duration-150">
+      <button className="bg-theme-secondary px-8 py-2 rounded-lg font-medium text-lg shadow active:scale-95 duration-150">
         Add
       </button>
     </form>
