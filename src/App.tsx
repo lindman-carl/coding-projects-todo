@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { toast, ToastContainer } from "react-toastify";
+import { toast, ToastContainer, ToastOptions } from "react-toastify";
 
 // components
 import AddTodo from "./components/AddTodo";
@@ -29,6 +29,16 @@ import { sortTodoItems } from "./utils";
 
 // css
 import "react-toastify/dist/ReactToastify.css";
+
+const basicToast: ToastOptions = {
+  position: "bottom-right",
+  autoClose: 2000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+};
 
 const App = () => {
   const [user, loading] = useAuthState(auth);
@@ -80,7 +90,7 @@ const App = () => {
     setTitle("");
 
     // notify user with toast
-    toast(`Task ${newTodo.title} added successfully`);
+    toast.success(`Task "${newTodo.title}" added successfully`, basicToast);
   };
 
   const handleToggle = async (todoItem: TodoItemType) => {
