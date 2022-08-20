@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { toast, ToastContainer } from "react-toastify";
 
 // components
 import AddTodo from "./components/AddTodo";
@@ -25,6 +26,9 @@ import { TodoItemType } from "./types/todoTypes";
 
 // utils
 import { sortTodoItems } from "./utils";
+
+// css
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const [user, loading] = useAuthState(auth);
@@ -74,6 +78,9 @@ const App = () => {
 
     // clear input
     setTitle("");
+
+    // notify user with toast
+    toast(`Task ${newTodo.title} added successfully`);
   };
 
   const handleToggle = async (todoItem: TodoItemType) => {
@@ -141,6 +148,7 @@ const App = () => {
         )}
       </ContentContainer>
       <SignatureFooter />
+      <ToastContainer position="bottom-right" />
     </div>
   );
 };
