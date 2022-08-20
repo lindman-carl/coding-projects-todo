@@ -110,7 +110,7 @@ const App = () => {
                 <img
                   src={user.photoURL}
                   alt="profile"
-                  className="w-10 h-10 border-2 border-theme-background rounded-lg shadow "
+                  className="w-10 h-10 rounded-lg shadow "
                 />
               </button>
             ) : (
