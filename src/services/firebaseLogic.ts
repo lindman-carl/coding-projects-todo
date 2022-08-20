@@ -3,9 +3,9 @@ import {
   collection,
   where,
   query,
+  addDoc,
   setDoc,
   doc,
-  addDoc,
 } from "firebase/firestore";
 import { TodoItemType } from "../types/todoTypes";
 import { db } from "./firebase";
@@ -59,6 +59,28 @@ export const addTodo = async (
 
     // add id to newTodo
     return { ...newTodo, id: res.id };
+  } catch (error) {
+    console.error(error);
+  }
+
+  return null;
+};
+
+export const toggleDoneTodo = async (
+  todoItem: TodoItemType
+): Promise<TodoItemType | null> => {
+  try {
+    if (!todoItem.id) {
+      throw Error("TodoItem has no id property");
+    }
+    const toggledTodo = {
+      ...todoItem,
+      done: !todoItem.done,
+    };
+    const res = setDoc(doc(db, "todoItems", todoItem.id), toggledTodo);
+    console.log("res", res);
+
+    return toggledTodo;
   } catch (error) {
     console.error(error);
   }

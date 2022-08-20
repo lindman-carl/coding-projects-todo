@@ -34,7 +34,6 @@ body {
 .content-container {
     @apply 
         w-full 
-        max-h-[30rem]
         overflow-auto
         sm:max-w-lg 
         p-8 

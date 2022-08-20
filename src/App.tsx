@@ -7,7 +7,11 @@ import Header from "./components/Header";
 import TodoList from "./components/TodoList";
 
 import { auth, logInWithGoogle } from "./services/firebaseAuthentication";
-import { addTodo, getTodoItemsByUserId } from "./services/firebaseLogic";
+import {
+  addTodo,
+  getTodoItemsByUserId,
+  toggleDoneTodo,
+} from "./services/firebaseLogic";
 import { TodoItemType } from "./types/todoTypes";
 
 type ContentContainerProps = {
@@ -56,16 +60,18 @@ const AddTodo = ({ uid }: AddTodoProps) => {
 
 const App = () => {
   const [user, loading] = useAuthState(auth);
-  const [todoItems, setTodoItems] = useState<TodoItemType[] | undefined>();
+  const [todoItems, setTodoItems] = useState<TodoItemType[] | []>([]);
   const [fetching, setFetching] = useState<boolean>(true);
 
   useEffect(() => {
     const getData = async () => {
       if (!loading && user) {
         const items = await getTodoItemsByUserId(user?.uid);
-
-        console.log("fetched items:", items);
-        setTodoItems(items);
+        const sortedItems = items.sort((a, z) =>
+          a.title.localeCompare(z.title)
+        );
+        console.log("fetched items:", sortedItems);
+        setTodoItems(sortedItems);
         setFetching(false);
       }
     };
@@ -73,12 +79,39 @@ const App = () => {
     getData();
   }, [user, loading]);
 
+  const handleToggle = async (todoItem: TodoItemType) => {
+    const toggledTodo = await toggleDoneTodo(todoItem);
+    console.log("ttt", toggledTodo);
+
+    if (toggledTodo === null) {
+      return;
+    }
+
+    // update todoItems
+    const filteredTodos = todoItems?.filter(
+      (todo) => todo.id !== toggledTodo.id
+    );
+
+    const newTodoItems = [...filteredTodos, toggledTodo];
+    console.log(newTodoItems);
+    const sortedTodoItems = newTodoItems.sort((a, z) =>
+      a.title.localeCompare(z.title)
+    );
+
+    // set totoItems
+    setTodoItems(sortedTodoItems);
+  };
+
   return (
     <div className="app-container">
       <Header> {!loading && user && <AddTodo uid={user.uid} />}</Header>
       <ContentContainer>
         {!loading && user ? (
-          <TodoList fetching={fetching} todoItems={todoItems} />
+          <TodoList
+            fetching={fetching}
+            todoItems={todoItems}
+            handleToggle={handleToggle}
+          />
         ) : (
           <button onClick={logInWithGoogle}>Login</button>
         )}
