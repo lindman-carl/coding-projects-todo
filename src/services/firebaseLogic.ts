@@ -77,7 +77,7 @@ export const toggleDoneTodo = async (
       ...todoItem,
       done: !todoItem.done,
     };
-    const res = setDoc(doc(db, "todoItems", todoItem.id), toggledTodo);
+    await setDoc(doc(db, "todoItems", todoItem.id), toggledTodo);
 
     return toggledTodo;
   } catch (error) {
