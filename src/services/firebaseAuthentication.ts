@@ -50,7 +50,7 @@ const logInWithGoogle = async () => {
       await setDoc(doc(db, "users", user.uid), userData);
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -59,7 +59,7 @@ const logInWithEmailAndPassword = async (email: string, password: string) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
