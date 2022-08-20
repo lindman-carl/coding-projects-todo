@@ -4,6 +4,7 @@ import { GoPlus } from "react-icons/go";
 
 // components
 import Header from "./components/Header";
+import SignatureFooter from "./components/SignatureFooter";
 import TodoList from "./components/TodoList";
 
 import { auth, logInWithGoogle } from "./services/firebaseAuthentication";
@@ -113,6 +114,7 @@ const App = () => {
           <button onClick={logInWithGoogle}>Login</button>
         )}
       </ContentContainer>
+      <SignatureFooter />
     </div>
   );
 };
