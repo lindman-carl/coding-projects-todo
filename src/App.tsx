@@ -7,7 +7,11 @@ import Header from "./components/Header";
 import SignatureFooter from "./components/SignatureFooter";
 import TodoList from "./components/TodoList";
 
-import { auth, logInWithGoogle } from "./services/firebaseAuthentication";
+import {
+  auth,
+  logInWithGoogle,
+  logout,
+} from "./services/firebaseAuthentication";
 import {
   addTodo,
   getTodoItemsByUserId,
@@ -102,7 +106,27 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <Header> {!loading && user && <AddTodo uid={user.uid} />}</Header>
+      <Header>
+        <div className="w-full grid grid-cols-6">
+          <div className="col-start-2 col-span-4 text-center text-3xl font-bold drop-shadow-lg">
+            Todo Meister
+          </div>
+          <div className="col-span-1 flex flex-row justify-end">
+            {!loading && user?.photoURL ? (
+              <button onClick={logout}>
+                <img
+                  src={user.photoURL}
+                  alt="profile"
+                  className="w-10 h-10 border-2 border-theme-background rounded-lg shadow "
+                />
+              </button>
+            ) : (
+              <button onClick={logInWithGoogle}>Login</button>
+            )}
+          </div>
+        </div>
+        {!loading && user && <AddTodo uid={user.uid} />}
+      </Header>
       <ContentContainer>
         {!loading && user ? (
           <TodoList
