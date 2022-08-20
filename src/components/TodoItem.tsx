@@ -11,14 +11,14 @@ type CheckmarkProps = {
 const Checkmark = ({ checked }: CheckmarkProps) => {
   if (checked) {
     return (
-      <div className="w-6 h-6 flex justify-center items-center bg-theme-light rounded-md border-2 border-theme-primary shadow">
+      <div className="w-6 h-6 flex justify-center items-center bg-theme-light rounded-md border-2 border-theme-primary">
         <BsCheckLg className="text-theme-primary mt-[2px]" />
       </div>
     );
   }
 
   return (
-    <div className="w-6 h-6 rounded-md border-2 border-theme-primary shadow"></div>
+    <div className="w-6 h-6 rounded-md border-2 border-theme-primary"></div>
   );
 };
 
