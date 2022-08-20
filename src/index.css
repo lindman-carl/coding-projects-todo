@@ -6,8 +6,21 @@ body {
     @apply bg-theme-light;
 }
 
-.app-container {
-    @apply
+@layer utilities {
+    /* Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+}
+
+@layer components {
+    .app-container {
+        @apply
         flex
         flex-col
         items-center
@@ -17,10 +30,10 @@ body {
         h-screen
         w-screen
         text-theme-text;
-}
-
-.header-container {
-    @apply 
+    }
+    
+    .header-container {
+        @apply 
         w-full 
         sm:max-w-lg 
         p-8 
@@ -29,12 +42,12 @@ body {
         text-theme-background
         shadow-lg
         flex flex-col justify-center items-center gap-y-4;
-}
-
-.content-container {
-    @apply 
+    }
+    
+    .content-container {
+        @apply 
         w-full 
-        overflow-auto
+        overflow-auto no-scrollbar
         sm:max-w-lg 
         p-8 
         rounded-xl
@@ -42,30 +55,31 @@ body {
         shadow-lg
         flex flex-col justify-start items-center
         ;
-}
-
-.todo-list-container {
-    @apply 
+    }
+    
+    .todo-list-container {
+        @apply 
         w-full 
         flex flex-col justify-start items-center divide-y
         ;
-}
-
-.todo-item-container {
-    @apply
+    }
+    
+    .todo-item-container {
+        @apply
         w-full
         p-2
         flex flex-row items-center justify-start gap-8
         active:shadow-lg sm:hover:pl-8
         transition-spacing
         ;
-}
-
-.add-todo-container {
-    @apply 
+    }
+    
+    .add-todo-container {
+        @apply 
         w-full 
         text-theme-background
         flex flex-row justify-between items-center
         gap-8
         ;
+    }
 }

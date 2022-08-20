@@ -1,5 +1,5 @@
 import React from "react";
-import { BsCheckLg } from "react-icons/bs";
+import { BsCheckLg, BsThreeDots } from "react-icons/bs";
 
 // types
 import { TodoItemType } from "../types/todoTypes";
@@ -39,6 +39,12 @@ const TodoItem = ({ item, handleToggle }: TodoItemProps) => {
       ) : (
         <div className="font-medium text-lg">{title}</div>
       )}
+      <button
+        className="text-theme-primary ml-auto"
+        onClick={() => console.log("clicked dots")}
+      >
+        <BsThreeDots />
+      </button>
     </button>
   );
 };
