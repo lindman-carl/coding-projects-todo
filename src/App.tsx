@@ -67,7 +67,6 @@ const App = () => {
 
     // update todoItems
     const newTodoItems = [...todoItems, newTodo];
-    console.log(newTodoItems);
     const sortedTodoItems = sortTodoItems(newTodoItems);
 
     // set totoItems
@@ -90,7 +89,6 @@ const App = () => {
     );
 
     const newTodoItems = [...filteredTodos, toggledTodo];
-    console.log(newTodoItems);
     const sortedTodoItems = sortTodoItems(newTodoItems);
 
     // set totoItems
