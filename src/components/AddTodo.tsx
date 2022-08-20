@@ -29,7 +29,7 @@ const AddTodo = ({ uid }: AddTodoProps) => {
   return (
     <form className="add-todo-container" onSubmit={handleSubmit}>
       <div className="w-full flex justify-start items-center border-b-2">
-        <GoPlus />
+        <GoPlus className="ml-2" />
         <input
           className="w-full bg-theme-primary outline-none font-medium text-lg px-2"
           value={title}
