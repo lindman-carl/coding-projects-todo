@@ -14,7 +14,11 @@ import {
   logInWithGoogle,
   logout,
 } from "./services/firebaseAuthentication";
-import { getTodoItemsByUserId, toggleDoneTodo } from "./services/firebaseLogic";
+import {
+  addTodo,
+  getTodoItemsByUserId,
+  toggleDoneTodo,
+} from "./services/firebaseLogic";
 
 // types
 import { TodoItemType } from "./types/todoTypes";
@@ -26,6 +30,7 @@ const App = () => {
   const [user, loading] = useAuthState(auth);
   const [todoItems, setTodoItems] = useState<TodoItemType[] | []>([]);
   const [fetching, setFetching] = useState<boolean>(true);
+  const [title, setTitle] = useState<string>("");
 
   useEffect(() => {
     const getData = async () => {
@@ -41,9 +46,39 @@ const App = () => {
     getData();
   }, [user, loading]);
 
+  const handleSubmit = async (event: React.SyntheticEvent) => {
+    event.preventDefault();
+
+    if (!user) {
+      return;
+    }
+
+    if (title.length < 1) {
+      return;
+    }
+
+    // add todo to firestore
+    const newTodo = await addTodo(user.uid, title);
+    console.log("new todo:", newTodo);
+
+    if (!newTodo) {
+      return;
+    }
+
+    // update todoItems
+    const newTodoItems = [...todoItems, newTodo];
+    console.log(newTodoItems);
+    const sortedTodoItems = sortTodoItems(newTodoItems);
+
+    // set totoItems
+    setTodoItems(sortedTodoItems);
+
+    // clear input
+    setTitle("");
+  };
+
   const handleToggle = async (todoItem: TodoItemType) => {
     const toggledTodo = await toggleDoneTodo(todoItem);
-    console.log("ttt", toggledTodo);
 
     if (toggledTodo === null) {
       return;
@@ -83,7 +118,13 @@ const App = () => {
             )}
           </div>
         </div>
-        {!loading && user && <AddTodo uid={user.uid} />}
+        {!loading && user && (
+          <AddTodo
+            title={title}
+            setTitle={setTitle}
+            handleSubmit={handleSubmit}
+          />
+        )}
       </Header>
       <ContentContainer>
         {!loading && user ? (

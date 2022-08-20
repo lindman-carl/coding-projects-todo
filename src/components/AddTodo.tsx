@@ -1,31 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { GoPlus } from "react-icons/go";
 
-// services
-import { addTodo } from "../services/firebaseLogic";
-
 type AddTodoProps = {
-  uid: string;
+  title: string;
+  setTitle: (value: React.SetStateAction<string>) => void;
+  handleSubmit: any;
 };
 
-const AddTodo = ({ uid }: AddTodoProps) => {
-  const [title, setTitle] = useState<string>("");
-
-  const handleSubmit = async (event: React.SyntheticEvent) => {
-    event.preventDefault();
-
-    if (title.length < 1) {
-      return;
-    }
-
-    // add todo to firestore
-    const newTodo = await addTodo(uid, title);
-    console.log("new todo:", newTodo);
-
-    // clear input
-    setTitle("");
-  };
-
+const AddTodo = ({ title, setTitle, handleSubmit }: AddTodoProps) => {
   return (
     <form className="add-todo-container" onSubmit={handleSubmit}>
       <div className="w-full flex justify-start items-center border-b-2">
