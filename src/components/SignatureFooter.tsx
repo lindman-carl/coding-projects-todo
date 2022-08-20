@@ -5,7 +5,7 @@ import { MdOpenInNew } from "react-icons/md";
 
 const SignatureFooter = () => {
   return (
-    <div className="font-normal inline-flex gap-4 text-theme-text">
+    <div className="font-normal inline-flex gap-4 text-theme-text mb-16 sm:mb-0">
       @lindman
       <a
         href="https://github.com/yoga-python/coding-projects-todo"
