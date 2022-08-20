@@ -30,6 +30,7 @@ const AddTodo = ({ uid }: AddTodoProps) => {
 
     // add todo to firestore
     const newTodo = await addTodo(uid, title);
+    console.log("new todo:", newTodo);
 
     // clear input
     setTitle("");
@@ -63,7 +64,7 @@ const App = () => {
       if (!loading && user) {
         const items = await getTodoItemsByUserId(user?.uid);
 
-        console.log(items);
+        console.log("fetched items:", items);
         setTodoItems(items);
         setFetching(false);
       }
