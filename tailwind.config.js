@@ -12,6 +12,9 @@ module.exports = {
           text: "#293241",
         },
       },
+      transitionProperty: {
+        spacing: "margin, padding",
+      },
     },
   },
   plugins: [],

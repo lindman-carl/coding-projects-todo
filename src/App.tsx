@@ -38,6 +38,10 @@ const AddTodo = ({ uid }: AddTodoProps) => {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
 
+    if (title.length < 1) {
+      return;
+    }
+
     // add todo to firestore
     const newTodo = await addTodo(uid, title);
     console.log("new todo:", newTodo);
@@ -57,7 +61,7 @@ const AddTodo = ({ uid }: AddTodoProps) => {
           placeholder={"Add task"}
         />
       </div>
-      <button className="bg-theme-secondary px-8 py-2 rounded font-medium text-lg shadow">
+      <button className="bg-theme-secondary px-8 py-2 rounded font-medium text-lg shadow active:scale-95 duration-150">
         Add
       </button>
     </form>

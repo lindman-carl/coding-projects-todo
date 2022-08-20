@@ -56,7 +56,8 @@ body {
         w-full
         p-2
         flex flex-row items-center justify-start gap-8
-        hover:bg-theme-secondary
+        hover:shadow-lg hover:pl-8
+        transition-spacing
         ;
 }
 
