@@ -60,7 +60,6 @@ const App = () => {
 
     // add todo to firestore
     const newTodo = await addTodo(user.uid, title);
-    console.log("new todo:", newTodo);
 
     if (!newTodo) {
       return;
@@ -107,7 +106,12 @@ const App = () => {
           </div>
           <div className="col-span-1 flex flex-row justify-end">
             {!loading && user?.photoURL ? (
-              <button onClick={logout}>
+              <button
+                onClick={() => {
+                  setTodoItems([]);
+                  logout();
+                }}
+              >
                 <img
                   src={user.photoURL}
                   alt="profile"
