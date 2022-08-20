@@ -13,6 +13,7 @@ import {
   toggleDoneTodo,
 } from "./services/firebaseLogic";
 import { TodoItemType } from "./types/todoTypes";
+import { sortTodoItems } from "./utils";
 
 type ContentContainerProps = {
   children: ReactNode | ReactNode[];
@@ -67,9 +68,7 @@ const App = () => {
     const getData = async () => {
       if (!loading && user) {
         const items = await getTodoItemsByUserId(user?.uid);
-        const sortedItems = items.sort((a, z) =>
-          a.title.localeCompare(z.title)
-        );
+        const sortedItems = sortTodoItems(items);
         console.log("fetched items:", sortedItems);
         setTodoItems(sortedItems);
         setFetching(false);
@@ -94,9 +93,7 @@ const App = () => {
 
     const newTodoItems = [...filteredTodos, toggledTodo];
     console.log(newTodoItems);
-    const sortedTodoItems = newTodoItems.sort((a, z) =>
-      a.title.localeCompare(z.title)
-    );
+    const sortedTodoItems = sortTodoItems(newTodoItems);
 
     // set totoItems
     setTodoItems(sortedTodoItems);
