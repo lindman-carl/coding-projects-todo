@@ -16,10 +16,12 @@ const TodoList = ({ fetching, todoItems, handleToggle }: TodoListProps) => {
     <div className="todo-list-container">
       {fetching ? (
         <ClipLoader className="my-8" color={"#3d5a80"} />
-      ) : (
-        todoItems?.map((item) => (
+      ) : todoItems ? (
+        todoItems.map((item) => (
           <TodoItem item={item} key={item.id} handleToggle={handleToggle} />
         ))
+      ) : (
+        <div>Add a task</div>
       )}
     </div>
   );
