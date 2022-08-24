@@ -17,6 +17,7 @@ import {
 } from "./services/firebaseAuthentication";
 import {
   addTodo,
+  deleteTodo,
   getTodoItemsByUserId,
   toggleDoneTodo,
 } from "./services/firebaseLogic";
@@ -112,6 +113,31 @@ const App = () => {
     setTodoItems(sortedTodoItems);
   };
 
+  const handleDelete = async (todoItem: TodoItemType) => {
+    // show loading bar
+    // maybe remove this. The problem is that it is not that quick
+    // or that it could remove one locally but not on the server
+    setFetching(true);
+
+    // delete todo
+    const deletedTodo = await deleteTodo(todoItem);
+
+    // if failure
+    if (deletedTodo === null) {
+      setFetching(false);
+      return;
+    }
+
+    // update todoItems
+    const filteredTodos = todoItems?.filter(
+      (todo) => todo.id !== deletedTodo.id
+    );
+
+    // no need to sort
+    setTodoItems(filteredTodos);
+    setFetching(false);
+  };
+
   return (
     <div className="app-container">
       <Header>
@@ -152,6 +178,7 @@ const App = () => {
             fetching={fetching}
             todoItems={todoItems}
             handleToggle={handleToggle}
+            handleDelete={handleDelete}
           />
         ) : (
           <button onClick={logInWithGoogle}>Login</button>

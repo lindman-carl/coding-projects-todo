@@ -53,6 +53,7 @@ export const addTodo = async (
       title,
       done: false,
       archived: false,
+      id: "temp-id",
     };
 
     // add document
@@ -88,15 +89,18 @@ export const toggleDoneTodo = async (
   return null;
 };
 
-export const deleteTodo = async (todoId: string): Promise<boolean> => {
+export const deleteTodo = async (
+  todoItem: TodoItemType
+): Promise<TodoItemType | null> => {
   // delete todoItem by id
+  // return deleted object
   try {
-    const deletedTodo = await deleteDoc(doc(db, "todoItems", todoId));
+    const deletedTodo = await deleteDoc(doc(db, "todoItems", todoItem.id));
     console.log(deletedTodo);
   } catch (error) {
     console.error(error);
-    return false;
+    return null;
   }
 
-  return true;
+  return todoItem;
 };

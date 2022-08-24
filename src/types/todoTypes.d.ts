@@ -1,5 +1,5 @@
 export type TodoItemType = {
-  id?: string;
+  id: string;
   title: string;
   uid: string;
   done: boolean;

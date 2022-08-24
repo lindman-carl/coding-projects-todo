@@ -25,9 +25,10 @@ const Checkmark = ({ checked }: CheckmarkProps) => {
 type TodoItemProps = {
   item: TodoItemType;
   handleToggle: any;
+  handleDelete: any;
 };
 
-const TodoItem = ({ item, handleToggle }: TodoItemProps) => {
+const TodoItem = ({ item, handleToggle, handleDelete }: TodoItemProps) => {
   const [optionsExpanded, setOptionsExpanded] = useState<boolean>(false);
 
   const { title, done } = item;
@@ -51,9 +52,20 @@ const TodoItem = ({ item, handleToggle }: TodoItemProps) => {
           className="text-theme-primary ml-auto active:scale-125 sm:hover:scale-125 transition-transform"
           onClick={() => setOptionsExpanded((prev) => !prev)}
         >
-          <BsThreeDots className={optionsExpanded ? "rotate-90" : ""} />
+          <BsThreeDots
+            className={optionsExpanded ? "rotate-90 transition-transform" : ""}
+          />
         </button>
-        {optionsExpanded && <div className="px-2">Edit | Delete</div>}
+        {optionsExpanded && (
+          <div className="px-2">
+            <button
+              className="delete-button"
+              onClick={() => handleDelete(item)}
+            >
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

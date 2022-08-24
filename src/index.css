@@ -83,4 +83,14 @@ body {
         gap-8
         ;
     }
+
+    .delete-button {
+        @apply
+        bg-red-600 
+        px-2
+        rounded 
+        text-theme-background text-sm
+        shadow 
+        active:scale-95 duration-150;
+    }
 }
