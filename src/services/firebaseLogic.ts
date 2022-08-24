@@ -6,6 +6,7 @@ import {
   addDoc,
   setDoc,
   doc,
+  deleteDoc,
 } from "firebase/firestore";
 import { TodoItemType } from "../types/todoTypes";
 import { db } from "./firebase";
@@ -85,4 +86,17 @@ export const toggleDoneTodo = async (
   }
 
   return null;
+};
+
+export const deleteTodo = async (todoId: string): Promise<boolean> => {
+  // delete todoItem by id
+  try {
+    const deletedTodo = await deleteDoc(doc(db, "todoItems", todoId));
+    console.log(deletedTodo);
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+
+  return true;
 };
