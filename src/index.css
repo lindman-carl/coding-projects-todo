@@ -69,8 +69,8 @@ body {
         w-full
         p-2
         text-left 
-        flex flex-row items-center justify-start gap-8
-        active:shadow-lg sm:hover:pl-8
+        flex flex-row items-center justify-start
+        sm:hover:pl-8
         transition-spacing
         ;
     }
