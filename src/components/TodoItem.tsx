@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { BsCheckLg, BsThreeDots } from "react-icons/bs";
 
 // types
@@ -28,6 +29,11 @@ type TodoItemProps = {
   handleDelete: any;
 };
 
+const variants = {
+  open: { opacity: 1, scaleX: 1, width: "100%" },
+  closed: { opacity: 1, scaleX: 0, width: 0 },
+};
+
 const TodoItem = ({ item, handleToggle, handleDelete }: TodoItemProps) => {
   const [optionsExpanded, setOptionsExpanded] = useState<boolean>(false);
 
@@ -53,19 +59,24 @@ const TodoItem = ({ item, handleToggle, handleDelete }: TodoItemProps) => {
           onClick={() => setOptionsExpanded((prev) => !prev)}
         >
           <BsThreeDots
-            className={optionsExpanded ? "rotate-90 transition-transform" : ""}
+            className={
+              optionsExpanded
+                ? "rotate-90 transition-transform"
+                : "transition-transform"
+            }
           />
         </button>
-        {optionsExpanded && (
-          <div className="px-2">
-            <button
-              className="delete-button"
-              onClick={() => handleDelete(item)}
-            >
-              Delete
-            </button>
-          </div>
-        )}
+        <motion.div
+          className="px-2 overflow-hidden"
+          initial={{ scaleX: 0, width: 0 }}
+          animate={optionsExpanded ? "open" : "closed"}
+          variants={variants}
+          style={{ originX: 1 }}
+        >
+          <button className="delete-button" onClick={() => handleDelete(item)}>
+            Delete
+          </button>
+        </motion.div>
       </div>
     </div>
   );
